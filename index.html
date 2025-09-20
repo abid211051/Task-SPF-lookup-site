@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SPF Finder</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <nav class="nav">
+      <h3
+        style="
+          font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+            'Lucida Sans', Arial, sans-serif;
+          font-size: 1.5em;
+        "
+      >
+        দেখুন দুনিয়া
+      </h3>
+    </nav>
+    <main class="main">
+      <h2
+        style="
+          font-family: 'Courier New', Courier, monospace;
+          font-size: 2em;
+          width: fit-content;
+          margin: 0 auto;
+        "
+      >
+        SPF Lookup
+      </h2>
+      <form action="" id="input-form">
+        <div class="input-div">
+          <i
+            class="fa fa-search"
+            style="
+              background: white;
+              font-size: 18px;
+              color: rgb(127, 127, 127);
+              padding: 0 15px;
+              border-radius: 8px;
+            "
+          ></i>
+          <input
+            type="text"
+            name="domain"
+            id="domain"
+            placeholder="Domain name"
+          />
+        </div>
+        <button>Check SPF</button>
+      </form>
+      <div id="output">
+        <p style="font-size: 1.8em; font-family: Arial, Helvetica, sans-serif">
+          SPF records for <span style="font-weight: 600">example.com</span>
+        </p>
+        <ul
+          style="
+            list-style: none;
+            border: 2px solid rgb(203, 203, 203);
+            border-radius: 8px;
+            margin-top: 10px;
+          "
+        >
+          <li class="spfs">
+            <p>
+              <span style="color: #0891b2">include</span> the SPF record at
+              <a href="#" style="color: #1e40af; text-decoration: none"
+                >_netblocks.google.com</a
+              >
+              and <span style="color: #1ca64f">pass</span> if it matches the
+              sender's IP.
+            </p>
+            <p
+              style="color: rgb(138, 138, 138); font-size: 15px; line-clamp: 1"
+            >
+              include:_netblocks.google.com
+            </p>
+          </li>
+          <li class="spfs">
+            <p>
+              <span style="color: #0891b2">include</span> the SPF record at
+              <a href="#" style="color: #1e40af; text-decoration: none"
+                >_netblocks.google.com</a
+              >
+              and <span style="color: #1ca64f">pass</span> if it matches the
+              sender's IP.
+            </p>
+            <p style="color: rgb(138, 138, 138); font-size: 15px">
+              include:_netblocks.google.com
+            </p>
+          </li>
+          <li class="spfs">
+            <p>
+              <span style="color: #0891b2">include</span> the SPF record at
+              <a href="#" style="color: #1e40af; text-decoration: none"
+                >_netblocks.google.com</a
+              >
+              and <span style="color: #1ca64f">pass</span> if it matches the
+              sender's IP.
+            </p>
+            <p style="color: rgb(138, 138, 138); font-size: 15px">
+              include:_netblocks.google.com
+            </p>
+          </li>
+          <li class="spfs">
+            <p>
+              Or else, mark the email as
+              <span style="color: #ea580c">softfail</span>.
+            </p>
+            <p style="color: rgb(138, 138, 138); font-size: 15px">~all</p>
+          </li>
+        </ul>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
