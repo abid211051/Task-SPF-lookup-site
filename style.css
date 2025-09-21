@@ -45,7 +45,7 @@ body {
 
 input {
   background: white;
-  padding: 15px 0;
+  padding: 13px 0;
   flex-grow: 1;
   outline: none;
   color: rgb(127, 127, 127);
@@ -61,11 +61,12 @@ input::placeholder {
 
 button {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: #390261;
+  background-color: #1abc52;
   padding: 15px 20px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   color: whitesmoke;
+  border: none;
 }
 button:active {
   scale: 0.95;
