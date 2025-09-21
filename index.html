@@ -17,6 +17,7 @@
           font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
             'Lucida Sans', Arial, sans-serif;
           font-size: 1.5em;
+          color: #3a0362;
         "
       >
         দেখুন দুনিয়া
@@ -56,10 +57,11 @@
       </form>
       <div id="output">
         <p style="font-size: 1.8em; font-family: Arial, Helvetica, sans-serif">
-          SPF records for <span style="font-weight: 600">example.com</span>
+          SPF records for
+          <span style="font-weight: 600" id="domain-heading">_</span>
         </p>
         <ul id="output-ul">
-          <li class="spfs" style="font-size: 15px; font-family: monospace">
+          <!-- <li class="spfs" style="font-size: 15px">
             <p>
               Or else, mark the email as
               <span style="color: #ea580c">softfail</span>.
@@ -67,7 +69,7 @@
             <p style="color: rgb(138, 138, 138); font-size: 15px">
               include:us._netblocks.mimecast.com
             </p>
-          </li>
+          </li> -->
         </ul>
       </div>
     </main>
