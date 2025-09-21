@@ -41,7 +41,7 @@
               background: white;
               font-size: 18px;
               color: rgb(127, 127, 127);
-              padding: 0 15px;
+              padding-left: 15px;
               border-radius: 8px;
             "
           ></i>
@@ -58,82 +58,15 @@
         <p style="font-size: 1.8em; font-family: Arial, Helvetica, sans-serif">
           SPF records for <span style="font-weight: 600">example.com</span>
         </p>
-        <ul
-          style="
-            list-style: none;
-            border: 2px solid rgb(203, 203, 203);
-            border-radius: 8px;
-            margin-top: 10px;
-          "
-        >
-          <li class="spfs">
-            <p>
-              <span style="color: #0891b2">Redirect</span> SPF checking to
-              <a
-                href="#"
-                style="
-                  color: #1e40af;
-                  text-decoration: underline;
-                  text-underline-offset: 3px;
-                "
-                >_spf.google.com.</a
-              >
-            </p>
-            <p style="color: rgb(138, 138, 138); font-size: 15px">
-              redirect=_spf.google.com
-            </p>
-          </li>
-          <li class="spfs">
-            <p>
-              <span style="color: #0891b2">include</span> the SPF record at
-              <a
-                href="#"
-                style="
-                  color: #1e40af;
-                  text-decoration: underline;
-                  text-underline-offset: 3px;
-                "
-                >_netblocks.agTjy.com</a
-              >
-              and <span style="color: #1ca64f">pass</span> if it matches the
-              sender's IP.
-            </p>
-            <p style="color: rgb(138, 138, 138); font-size: 15px">
-              include:_netblocks.google.com
-            </p>
-          </li>
-          <li class="spfs">
-            <p>
-              <span style="color: #0891b2">include</span> the SPF record at
-              <a href="#" style="color: #1e40af; text-decoration: none"
-                >_netblocks.google.com</a
-              >
-              and <span style="color: #1ca64f">pass</span> if it matches the
-              sender's IP.
-            </p>
-            <p style="color: rgb(138, 138, 138); font-size: 15px">
-              include:_netblocks.google.com
-            </p>
-          </li>
-          <li class="spfs">
-            <p>
-              <span style="color: #0891b2">include</span> the SPF record at
-              <a href="#" style="color: #1e40af; text-decoration: none"
-                >_netblocks.google.com</a
-              >
-              and <span style="color: #1ca64f">pass</span> if it matches the
-              sender's IP.
-            </p>
-            <p style="color: rgb(138, 138, 138); font-size: 15px">
-              include:_netblocks.google.com
-            </p>
-          </li>
-          <li class="spfs">
+        <ul id="output-ul">
+          <li class="spfs" style="font-size: 15px; font-family: monospace">
             <p>
               Or else, mark the email as
               <span style="color: #ea580c">softfail</span>.
             </p>
-            <p style="color: rgb(138, 138, 138); font-size: 15px">~all</p>
+            <p style="color: rgb(138, 138, 138); font-size: 15px">
+              include:us._netblocks.mimecast.com
+            </p>
           </li>
         </ul>
       </div>

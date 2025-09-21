@@ -10,14 +10,13 @@ body {
   min-height: 100vh;
 }
 .nav {
-  background-color: white;
+  background-color: rgb(235, 235, 235);
   padding: 20px 20px;
 }
 .main {
-  background-color: rgb(237, 237, 237);
   height: 100%;
   flex-grow: 1;
-  padding: 20px 20px;
+  padding: 20px 40px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -44,8 +43,8 @@ body {
 }
 
 input {
-  background: white;
-  padding: 13px 0;
+  background: none;
+  padding: 13px 10px;
   flex-grow: 1;
   outline: none;
   color: rgb(127, 127, 127);
@@ -71,17 +70,36 @@ button {
 button:active {
   scale: 0.95;
 }
-
+ul {
+  margin: 0 auto;
+  width: 1300px;
+  list-style: none;
+  border: 1px solid rgb(203, 203, 203);
+  border-radius: 8px;
+  margin-top: 10px;
+}
 .spfs {
   width: 100%;
-  padding: 10px;
-  border-bottom: 2px solid rgb(203, 203, 203);
+  padding: 15px;
+  border-bottom: 1px solid rgb(203, 203, 203);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 15px;
   color: rgb(80, 80, 80);
   font-weight: 600;
+}
+
+.spfs:last-child {
+  border-bottom: none;
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 1400px) {
+  ul {
+    width: auto;
+  }
 }
 
 @media screen and (max-width: 640px) {
@@ -94,6 +112,9 @@ button:active {
     border: 2px solid rgb(222, 222, 222);
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
+  }
+  .main {
+    padding: 20px 10px;
   }
   button {
     border-radius: 8px;
