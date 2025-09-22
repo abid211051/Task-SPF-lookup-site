@@ -24,7 +24,17 @@ const notFoundErrorMsg = () => {
   const p = document.createElement("p");
   p.style.background = "#fefce8";
   p.style.color = "#a16207";
-  p.textContent = "Couldn't find any SPF record for that domain";
+  p.style.width = "100%";
+  p.style.padding = "10px 5px";
+  const i = document.createElement("i");
+  i.classList.add("fas");
+  i.style.fontSize = "18px";
+  i.innerHTML = "&#xf071;";
+  i.style.marginRight = "10px";
+  p.appendChild(i);
+  p.appendChild(
+    document.createTextNode("Couldn't find any SPF record for that domain")
+  );
   li.appendChild(p);
   ul.appendChild(li);
 };
@@ -74,7 +84,8 @@ const searchInput = async (event) => {
 const visualizeData = (spfs) => {
   const redirect = [];
   const include = [];
-  const ip = [];
+  const ip4 = [];
+  const ip6 = [];
   let j = 6;
   let substr = "";
 
@@ -89,8 +100,10 @@ const visualizeData = (spfs) => {
   };
 
   while (j < spfs.length) {
-    if (substr === "ip4:" || substr === "ip6:") {
-      pushSubstr(ip);
+    if (substr === "ip4:") {
+      pushSubstr(ip4);
+    } else if (substr === "ip6:") {
+      pushSubstr(ip6);
     } else if (substr === "redirect=") {
       pushSubstr(redirect);
     } else if (substr === "include:") {
@@ -102,9 +115,7 @@ const visualizeData = (spfs) => {
     j++;
   }
   ul.textContent = "";
-  console.log(!redirect.length && !include.length && !ip.length);
-
-  if (!redirect.length && !include.length && !ip.length) {
+  if (!redirect.length && !include.length && !ip4.length && !ip6.length) {
     notFoundErrorMsg();
     return;
   }
@@ -113,7 +124,7 @@ const visualizeData = (spfs) => {
       listNodeAppending(
         { color: "#0891b2", text: "Redirect" },
         { frontText: " SPF checking to " },
-        val,
+        { text: val, color: "#1e40af" },
         `redirect=${val}`
       );
     });
@@ -126,20 +137,47 @@ const visualizeData = (spfs) => {
           frontText: " the SPF record at ",
           lastText: " and pass if it matches the sender's IP",
         },
-        val,
+        { text: val, color: "#1e40af" },
         `include:${val}`
       );
     });
   }
-  if (ip.length > 0) {
-    ip.forEach((val) => {
+  if (ip4.length > 0) {
+    ip4.forEach((val) => {
       listNodeAppending(
         { color: "#1ca64f", text: "Pass" },
         { frontText: " if the email sender's IP is between " },
-        val,
+        { text: val, color: "#000000ff" },
         `ip4:${val}`
       );
     });
+  }
+  if (ip6.length > 0) {
+    ip6.forEach((val) => {
+      listNodeAppending(
+        { color: "#1ca64f", text: "Pass" },
+        { frontText: " if the email sender's IP is between " },
+        { text: val, color: "#000000ff" },
+        `ip6:${val}`
+      );
+    });
+  }
+  if (spfs.substring(spfs.length - 3, spfs.length) === "all") {
+    if (spfs[spfs.length - 4] === "~") {
+      listNodeAppending(
+        { text: "mark the ", color: "#000000ff" },
+        { frontText: "email as " },
+        { text: "softfail", color: "#ea580c" },
+        "~all"
+      );
+    } else if (spfs[spfs.length - 4] === "-") {
+      listNodeAppending(
+        { text: "mark the ", color: "#000000ff" },
+        { frontText: "email as " },
+        { text: "fail", color: "#dc2626" },
+        "-all"
+      );
+    }
   }
 };
 
@@ -154,18 +192,20 @@ const listNodeAppending = (firstSpan, firstP, secondSpan, secondP) => {
   li.style.fontFamily = "monospace";
   span1.style.color = firstSpan.color;
   span1.textContent = firstSpan.text;
+  ul.childElementCount > 0 &&
+    p1.appendChild(document.createTextNode("Or else, "));
   p1.appendChild(span1);
   p1.appendChild(document.createTextNode(` ${firstP.frontText} `));
   if (firstSpan.text === "Redirect" || firstSpan.text === "Include") {
-    span2.textContent = secondSpan;
-    span2.style.color = "#1e40af";
+    span2.textContent = secondSpan.text;
+    span2.style.color = secondSpan.color;
     span2.style.textDecoration = "underline";
     span2.style.textUnderlineOffset = "3px";
     span2.style.cursor = "pointer";
-    span2.addEventListener("click", () => urlUpdate(secondSpan));
+    span2.addEventListener("click", () => urlUpdate(secondSpan.text));
   } else {
-    span2.textContent = secondSpan;
-    span2.style.fontWeight = 800;
+    span2.textContent = secondSpan.text;
+    span2.style.color = secondSpan.color;
   }
   p1.appendChild(span2);
   if (firstSpan.text === "Include") {
