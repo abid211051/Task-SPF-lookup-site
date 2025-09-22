@@ -39,8 +39,28 @@ const notFoundErrorMsg = () => {
   ul.appendChild(li);
 };
 
+const loading = () => {
+  ul.textContent = "";
+  const p = document.createElement("p");
+  p.style.padding = "10px 5px";
+  p.style.width = "fit-content";
+  p.style.margin = "0 auto";
+  p.style.fontSize = "18px";
+  p.style.fontFamily = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+  p.appendChild(document.createTextNode("Loading"));
+  for (let i = 0; i < 3; i++) {
+    const span = document.createElement("span");
+    span.classList.add("dot");
+    span.textContent = ".";
+    span.style.fontWeight = "700";
+    p.appendChild(span);
+  }
+  ul.appendChild(p);
+};
+
 const fetchData = async (domain) => {
   try {
+    loading();
     domainHeading.textContent = domain;
     const response = await fetch(`${dnsResolver}?name=${domain}&type=TXT`);
     const parseResponse = await response.json();
@@ -146,7 +166,7 @@ const visualizeData = (spfs) => {
     ip4.forEach((val) => {
       listNodeAppending(
         { color: "#1ca64f", text: "Pass" },
-        { frontText: " if the email sender's IP is between " },
+        { frontText: " if the email sender's IP is in range of " },
         { text: val, color: "#000000ff" },
         `ip4:${val}`
       );
@@ -156,7 +176,7 @@ const visualizeData = (spfs) => {
     ip6.forEach((val) => {
       listNodeAppending(
         { color: "#1ca64f", text: "Pass" },
-        { frontText: " if the email sender's IP is between " },
+        { frontText: " if the email sender's IP is in range of " },
         { text: val, color: "#000000ff" },
         `ip6:${val}`
       );
@@ -190,6 +210,7 @@ const listNodeAppending = (firstSpan, firstP, secondSpan, secondP) => {
   li.classList.add("spfs");
   li.style.fontSize = "15px";
   li.style.fontFamily = "monospace";
+  p1.style.overflowWrap = "anywhere";
   span1.style.color = firstSpan.color;
   span1.textContent = firstSpan.text;
   ul.childElementCount > 0 &&
@@ -213,6 +234,7 @@ const listNodeAppending = (firstSpan, firstP, secondSpan, secondP) => {
   }
   p2.style.color = "rgb(138, 138, 138)";
   p2.style.fontSize = "15px";
+  p2.style.overflowWrap = "anywhere";
   p2.textContent = secondP;
   li.appendChild(p1);
   li.appendChild(p2);
