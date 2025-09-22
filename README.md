@@ -1,6 +1,6 @@
 # SPF Lookup
 
-## ⚙️ Tools Needed
+## ⚙️ Tools Need To Run Locally
 
 - Install the **VSCode Live Server** extension.
 
